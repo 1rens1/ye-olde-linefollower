@@ -1,0 +1,2 @@
+#define SENSOR_LEFT 9
+#define SENSOR_RIGHT 10

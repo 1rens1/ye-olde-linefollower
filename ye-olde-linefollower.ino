@@ -2,14 +2,28 @@
 
 void setup() {
   Serial.begin(9600);
-  pinMode(SENSOR_LEFT, OUTPUT);
-  pinMode(SENSOR_RIGHT, OUTPUT);
+  pinMode(IR_LEFT, OUTPUT);
+  pinMode(IR_RIGHT, OUTPUT);
+  pinMode(US_ECHO, INPUT);
+  pinMode(US_TRIG, OUTPUT);
 
   Serial.println("Hello world!");
-  Serial.println(SENSOR_LEFT);
+  Serial.println(IR_LEFT);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+float duration = 0;
+float distance = 0;
 
+void loop() {
+  digitalWrite(US_TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(US_TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(US_TRIG, LOW);
+  
+  duration = pulseIn(US_ECHO, HIGH);
+  distance = (duration * 0.0343) / 2;
+
+  Serial.print("Distance = ");
+  Serial.println(distance);
 }
